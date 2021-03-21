@@ -8,14 +8,40 @@ import TodoListItems from "./components/TodoListItems";
 
 class App extends React.Component {
     state = {
-        allTodos: [{text: 'test_todo1', isCompleted: true, id: '1123'}, {
-            text: 'test_todo2',
-            isCompleted: true,
-            id: '11223'
-        }],
+        allTodos: [], // Ex. data [{text: 'test_todo1', isCompleted: true, id: '1123'}]
         navigationState: 'all',
         newTodo: '',
-        editTodoData: {isCompleted: false, isEdited: false}
+        editTodoData: {text:'' ,isCompleted: false, isEdited: false}
+    }
+
+    componentDidUpdate(prevProps, prevState, snapshot) {
+        if (!this.state.editTodoData.isEdited )
+            this.saveToLocalStorage()
+        else{
+            // add edited data to local storage
+            const editedTodo = {
+                text : this.state.editTodoData.text,
+                isCompleted : this.state.editTodoData.isCompleted,
+                id : makeID(10)
+            }
+            this.saveToLocalStorage(editedTodo)
+        }
+    }
+
+    componentDidMount() {
+        const allTodos = JSON.parse(localStorage.getItem('allTodos'))
+        this.setState({allTodos})
+    }
+
+    saveToLocalStorage(editedTodo= false) {
+        let JsonTodos
+        if (editedTodo){
+            let todosCopy = JSON.parse(JSON.stringify(this.state.allTodos))
+            todosCopy.push(editedTodo)
+            JsonTodos = JSON.stringify(todosCopy)
+        } else
+            JsonTodos = JSON.stringify(this.state.allTodos)
+        localStorage.setItem('allTodos', JsonTodos)
     }
 
     changeNavigationState = (event) => {
@@ -80,7 +106,7 @@ class App extends React.Component {
             const todoText = allTodos[machIndex].text
             this.setState({
                 newTodo: todoText,
-                editTodoData: {isCompleted: todoIsCompleted, isEdited: true}
+                editTodoData: {isCompleted: todoIsCompleted, isEdited: true, text:todoText}
             })
             this.deleteTodo(event)
         }
@@ -131,7 +157,6 @@ class App extends React.Component {
                 />
 
                 {todoList}
-
 
                 {
                     this.state.navigationState === 'completed' &&

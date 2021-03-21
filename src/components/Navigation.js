@@ -4,7 +4,6 @@ import "components/Navigation.css"
 function Navigation(props){
     const changeNavigationState = props.changeNavigationState
     const navigationState = props.navigationState
-    console.log(navigationState)
     return(
         <nav>
             <ul>
