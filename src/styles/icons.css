@@ -1,0 +1,7 @@
+.white-icon{
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+}
+
+.light-gray-icon{
+    filter: invert(98%) sepia(47%) saturate(2063%) hue-rotate(180deg) brightness(89%) contrast(90%);
+}

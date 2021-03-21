@@ -1,0 +1,37 @@
+:root{
+    --li-size: 89px
+}
+nav{
+    width: 100%;
+}
+
+nav ul{
+    padding: 0;
+    display: flex;
+    list-style-type: none;
+    justify-content: space-around;
+}
+
+nav li{
+    font-size: 1rem;
+    font-weight: 600;
+    width: var(--li-size);
+    text-align: center;
+}
+
+nav li.selected::after{
+    content: '';
+    display: block;
+    position: relative;
+    width: var(--li-size);
+    height: 4px;
+    background-color: var(--primary);
+    border-radius: 4px 4px 0 0;
+    bottom: -16px;
+}
+
+hr{
+    background-color: var(--gray);
+    height: 1px;
+    border: none;
+}

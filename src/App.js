@@ -3,27 +3,29 @@ import Navigation from "./components/Navigation";
 import AddTodo from "./components/AddTodo";
 import {returnMachIndex} from "./useful_functions/returnMachIndex";
 import makeID from "./useful_functions/makeID";
-import './App.css';
+import 'App.css';
 import TodoListItems from "./components/TodoListItems";
 
 class App extends React.Component {
     state = {
-        allTodos:[{text:'test_todo1', isCompleted:true, id:'1123'}, {text:'test_todo2', isCompleted:true, id:'11223'}],
-        navigationState:'all',
-        newTodo:'',
-        editTodoData:{isCompleted:false, isEdited:false}
+        allTodos: [{text: 'test_todo1', isCompleted: true, id: '1123'}, {
+            text: 'test_todo2',
+            isCompleted: true,
+            id: '11223'
+        }],
+        navigationState: 'all',
+        newTodo: '',
+        editTodoData: {isCompleted: false, isEdited: false}
     }
 
     changeNavigationState = (event) => {
-        // const newNavigationState = event.target.value
         const newNavigationState = event.target.dataset.navigationSection
-        console.log(newNavigationState)
         this.setState({navigationState: newNavigationState})
     }
 
     handleChange = (event) => {
         const {value, name} = event.target
-        this.setState({[name]:value})
+        this.setState({[name]: value})
     }
 
     addNewTodo = (event) => {
@@ -31,7 +33,7 @@ class App extends React.Component {
         const newTodoText = this.state.newTodo
         const isCompleted = this.state.editTodoData.isCompleted
         if (newTodoText) {
-            const newTodo = {text: newTodoText, isCompleted: isCompleted, id:makeID(10)}
+            const newTodo = {text: newTodoText, isCompleted: isCompleted, id: makeID(10)}
             const todosToFormat = JSON.parse(JSON.stringify(this.state.allTodos)) // Deep copy state.allTodos
             todosToFormat.push(newTodo)
 
@@ -40,7 +42,7 @@ class App extends React.Component {
                     ...lastState,
                     allTodos: todosToFormat,
                     newTodo: '',
-                    editTodoData:{isEdited:false, isCompleted: false}
+                    editTodoData: {isEdited: false, isCompleted: false}
                 })
             })
         } else {
@@ -53,7 +55,7 @@ class App extends React.Component {
         const {id} = event.target.dataset
         const todosToFormat = JSON.parse(JSON.stringify(this.state.allTodos)) // Deep copy state.allTodos
         const indexToDelete = returnMachIndex(todosToFormat, id)
-        todosToFormat.splice(indexToDelete,1)
+        todosToFormat.splice(indexToDelete, 1)
 
         this.setState({allTodos: todosToFormat})
     }
@@ -61,8 +63,8 @@ class App extends React.Component {
     deleteAllCompletedTodos = (event) => {
         const todosToFormat = JSON.parse(JSON.stringify(this.state.allTodos)) // Deep copy state.allTodos
 
-        const newTodos = todosToFormat.filter((todo)=>{
-            if(!todo.isCompleted) return todo
+        const newTodos = todosToFormat.filter((todo) => {
+            if (!todo.isCompleted) return todo
         })
         this.setState({allTodos: newTodos})
     }
@@ -70,15 +72,15 @@ class App extends React.Component {
     editTodo = (event) => {
         if (this.state.editTodoData.isEdited)
             alert("First end edit selected todo")
-        else{
+        else {
             const {id} = event.target.dataset
             const allTodos = this.state.allTodos // Deep copy state.allTodos
             const machIndex = returnMachIndex(allTodos, id)
             const todoIsCompleted = allTodos[machIndex].isCompleted
             const todoText = allTodos[machIndex].text
             this.setState({
-                    newTodo:todoText,
-                    editTodoData:{isCompleted:todoIsCompleted, isEdited:true}
+                newTodo: todoText,
+                editTodoData: {isCompleted: todoIsCompleted, isEdited: true}
             })
             this.deleteTodo(event)
         }
@@ -96,28 +98,29 @@ class App extends React.Component {
     render() {
         const todoList = this.state.allTodos.filter((todoItem) => {
             if (this.state.navigationState === 'active' && todoItem.isCompleted === false)
-                return(todoItem)
+                return (todoItem)
             if (this.state.navigationState === 'completed' && todoItem.isCompleted === true)
-                return(todoItem)
+                return (todoItem)
             if (this.state.navigationState === 'all')
-                return(todoItem)
+                return (todoItem)
+        }).map((todoItem) => {
+            return (
+                <TodoListItems
+                    data={todoItem}
+                    deleteTodo={this.deleteTodo}
+                    updateCheckState={this.updateCheckState}
+                    editTodo={this.editTodo}
+                    navigationState={this.state.navigationState}
+                />
+            )
         })
-            .map((todoItem)=>{
-                return (
-                    <TodoListItems
-                        data = {todoItem}
-                        deleteTodo = {this.deleteTodo}
-                        updateCheckState = {this.updateCheckState}
-                        editTodo = {this.editTodo}
-                    />
-                )
-            })
-
 
         return (
-            <div className="App">
+            <div id="main-container">
+                <h1 id="app-title"> #todo </h1>
                 <Navigation
                     changeNavigationState={this.changeNavigationState}
+                    navigationState={this.state.navigationState}
                 />
 
                 <AddTodo
@@ -129,9 +132,14 @@ class App extends React.Component {
 
                 {todoList}
 
+
                 {
                     this.state.navigationState === 'completed' &&
-                    <button onClick={this.deleteAllCompletedTodos}> Delete all </button>
+                    <div className="flex-float-right">
+                        <button onClick={this.deleteAllCompletedTodos} id="delete-all-btn">
+                            &nbsp;delete all
+                        </button>
+                    </div>
                 }
             </div>
         )

@@ -1,0 +1,30 @@
+.todo-item-container{
+    margin-bottom: 27px;
+    width: 100%;
+    display: grid;
+    grid-column-gap: 11px;
+
+    grid-template-columns: 20px 1fr 42px;
+    grid-template-rows: max-content;
+    justify-content: space-between; /*?*/
+    align-content: start;
+    grid-template-areas:
+    'todo-checkbox todo-text todo-icons';
+}
+
+.todo-checkbox{
+    grid-area: todo-checkbox;
+}
+
+.todo-text{
+    grid-area: todo-text;
+    font-size: 1.2rem;
+    margin: 0;
+    overflow: hidden;
+}
+
+.todo-icons{
+    grid-area: todo-icons;
+    display: flex;
+    flex-direction: row-reverse;
+}

@@ -1,0 +1,65 @@
+#main-container{
+    margin: 0 5px;
+    width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#app-title{
+    font-size: 2rem;
+    letter-spacing: 0;
+    margin: 27px 0;
+}
+
+/**/
+.flex-float-right{
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+#delete-all-btn{
+    margin-top: 5px;
+    padding: 12px 28px;
+    font-family: var(--fonts);
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--white);
+
+    width: auto;
+    height: auto;
+
+    background-color: var(--red);
+    border: 0 transparent solid;
+    border-radius: 4px
+}
+
+#delete-all-btn::before{
+    background-image: url("icons/delete_outline-black-18dp.svg");
+    filter: invert(100%) sepia(0%) saturate(0%) hue-rotate(93deg) brightness(103%) contrast(103%);
+    background-size: 11px 11px;
+    display: inline-block;
+    width: 11px;
+    height: 11px;
+    content:"";
+}
+
+#delete-all-btn:hover{
+    background-color: var(--red-dark);
+}
+
+#delete-all-btn:active{
+    background-color: var(--red-light);
+}
+
+#delete-all-btn:focus{
+    outline: 0;
+}
+
+#delete-all-btn img{
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    /*margin-right: 2px;*/
+}
