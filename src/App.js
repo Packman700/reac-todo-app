@@ -1,7 +1,7 @@
 import React from "react";
 import Navigation from "./components/Navigation";
 import AddTodo from "./components/AddTodo";
-import {returnMachIndex} from "./useful_functions/delete_item/functions";
+import {returnMachIndex} from "./useful_functions/returnMachIndex";
 import makeID from "./useful_functions/makeID";
 import './App.css';
 import TodoListItems from "./components/TodoListItems";

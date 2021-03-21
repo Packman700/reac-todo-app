@@ -1,5 +1,5 @@
 import React from "react";
-import binIcon from "../assets/delete_outline-black-18dp.svg" // in future add react-relative-path
+import binIcon from "icons/delete_outline-black-18dp.svg" // in future add react-relative-path
 
 function TodoListItems(props){
     const text = props.data.text

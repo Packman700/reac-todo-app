@@ -8,6 +8,4 @@ function returnMachIndex(array, id) {
     return matchIndex
 }
 
-
-
 export {returnMachIndex}
