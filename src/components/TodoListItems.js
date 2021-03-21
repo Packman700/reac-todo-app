@@ -33,8 +33,6 @@ function TodoListItems(props){
                 data-id={id}
                 alt="edit icon"
             />
-
-
         </div>
     )
 }

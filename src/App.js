@@ -58,13 +58,13 @@ class App extends React.Component {
         this.setState({allTodos: todosToFormat})
     }
 
-    updateCheckState = (event) => {
-        const {id} = event.target.dataset
+    deleteAllCompletedTodos = (event) => {
         const todosToFormat = JSON.parse(JSON.stringify(this.state.allTodos)) // Deep copy state.allTodos
-        const machIndex = returnMachIndex(todosToFormat, id)
-        todosToFormat[machIndex].isCompleted = !todosToFormat[machIndex].isCompleted
 
-        this.setState({allTodos: todosToFormat})
+        const newTodos = todosToFormat.filter((todo)=>{
+            if(!todo.isCompleted) return todo
+        })
+        this.setState({allTodos: newTodos})
     }
 
     editTodo = (event) => {
@@ -82,6 +82,15 @@ class App extends React.Component {
             })
             this.deleteTodo(event)
         }
+    }
+
+    updateCheckState = (event) => {
+        const {id} = event.target.dataset
+        const todosToFormat = JSON.parse(JSON.stringify(this.state.allTodos)) // Deep copy state.allTodos
+        const machIndex = returnMachIndex(todosToFormat, id)
+        todosToFormat[machIndex].isCompleted = !todosToFormat[machIndex].isCompleted
+
+        this.setState({allTodos: todosToFormat})
     }
 
     render() {
@@ -119,6 +128,11 @@ class App extends React.Component {
                 />
 
                 {todoList}
+
+                {
+                    this.state.navigationState === 'completed' &&
+                    <button onClick={this.deleteAllCompletedTodos}> Delete all </button>
+                }
             </div>
         )
     }
