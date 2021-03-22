@@ -17,7 +17,7 @@ function AddTodo(props){
                 placeholder="add details"
             />
             <button
-                disabled={cantAddNewTodo}
+                disabled={cantAddNewTodo || !newTodoValue.length}
             >
                 Add
             </button>

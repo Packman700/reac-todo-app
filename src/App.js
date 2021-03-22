@@ -69,25 +69,21 @@ class App extends React.Component {
         event.preventDefault()
         const newTodoText = this.state.newTodo
         const isCompleted = this.state.editTodoData.isCompleted
-        if (newTodoText) {
-            const newTodo = {text: newTodoText, isCompleted: isCompleted, id: makeID(10)}
-            let todosToFormat = JSON.parse(JSON.stringify(this.state.allTodos)) // Deep copy state.allTodos
+        const newTodo = {text: newTodoText, isCompleted: isCompleted, id: makeID(10)}
 
-            if (todosToFormat !== null) todosToFormat.push(newTodo)
-            else todosToFormat = [newTodo]
+        let todosToFormat = JSON.parse(JSON.stringify(this.state.allTodos)) // Deep copy state.allTodos
 
-            this.setState((lastState) => {
-                return ({
-                    ...lastState,
-                    allTodos: todosToFormat,
-                    newTodo: '',
-                    editTodoData: {isEdited: false, isCompleted: false}
-                })
+        if (todosToFormat !== null) todosToFormat.push(newTodo)
+        else todosToFormat = [newTodo]
+
+        this.setState((lastState) => {
+            return ({
+                ...lastState,
+                allTodos: todosToFormat,
+                newTodo: '',
+                editTodoData: {isEdited: false, isCompleted: false}
             })
-        } else {
-            // Some Action if array is empyu
-            alert('Cant add empty task')
-        }
+        })
     }
 
     deleteTodo = (event) => {
