@@ -60,8 +60,10 @@ class App extends React.Component {
         const isCompleted = this.state.editTodoData.isCompleted
         if (newTodoText) {
             const newTodo = {text: newTodoText, isCompleted: isCompleted, id: makeID(10)}
-            const todosToFormat = JSON.parse(JSON.stringify(this.state.allTodos)) // Deep copy state.allTodos
-            todosToFormat.push(newTodo)
+            let todosToFormat = JSON.parse(JSON.stringify(this.state.allTodos)) // Deep copy state.allTodos
+
+            if (todosToFormat !== null) todosToFormat.push(newTodo)
+            else todosToFormat = [newTodo]
 
             this.setState((lastState) => {
                 return ({
@@ -122,24 +124,27 @@ class App extends React.Component {
     }
 
     render() {
-        const todoList = this.state.allTodos.filter((todoItem) => {
-            if (this.state.navigationState === 'active' && todoItem.isCompleted === false)
-                return (todoItem)
-            if (this.state.navigationState === 'completed' && todoItem.isCompleted === true)
-                return (todoItem)
-            if (this.state.navigationState === 'all')
-                return (todoItem)
-        }).map((todoItem) => {
-            return (
-                <TodoListItems
-                    data={todoItem}
-                    deleteTodo={this.deleteTodo}
-                    updateCheckState={this.updateCheckState}
-                    editTodo={this.editTodo}
-                    navigationState={this.state.navigationState}
-                />
-            )
-        })
+        let todoList = <div/>
+        if (this.state.allTodos!==null) {
+            todoList = this.state.allTodos.filter((todoItem) => {
+                if (this.state.navigationState === 'active' && todoItem.isCompleted === false)
+                    return (todoItem)
+                if (this.state.navigationState === 'completed' && todoItem.isCompleted === true)
+                    return (todoItem)
+                if (this.state.navigationState === 'all')
+                    return (todoItem)
+            }).map((todoItem) => {
+                return (
+                    <TodoListItems
+                        data={todoItem}
+                        deleteTodo={this.deleteTodo}
+                        updateCheckState={this.updateCheckState}
+                        editTodo={this.editTodo}
+                        navigationState={this.state.navigationState}
+                    />
+                )
+            })
+        }
 
         return (
             <div id="main-container">
