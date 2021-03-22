@@ -12,7 +12,7 @@ function TodoListItems(props){
     const id = props.data.id
     return(
         <div className="todo-item-container">
-            {/*className={isCompleted?'':'uncompleted'}*/}
+            {/*className=*/}
             <label className="control control-checkbox">
                 <input type="checkbox"
                        name="isCompleted"
@@ -22,7 +22,7 @@ function TodoListItems(props){
                 <div className="control_indicator"/>
             </label>
 
-            <p className="todo-text"> {text} </p>
+            <p className={isCompleted?"todo-text completed":"todo-text"}> {text} </p>
 
             <div className="todo-icons">
                 { props.navigationState !== "completed" &&

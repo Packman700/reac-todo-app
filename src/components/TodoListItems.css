@@ -28,3 +28,8 @@
     display: flex;
     flex-direction: row-reverse;
 }
+
+.completed{
+    color: var(--dark-gray);
+    text-decoration: line-through;
+}
