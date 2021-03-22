@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/reac-todo-app/static/css/main.79842562.chunk.css",
-    "main.js": "/reac-todo-app/static/js/main.0a47a649.chunk.js",
-    "main.js.map": "/reac-todo-app/static/js/main.0a47a649.chunk.js.map",
+    "main.js": "/reac-todo-app/static/js/main.84c0ceaa.chunk.js",
+    "main.js.map": "/reac-todo-app/static/js/main.84c0ceaa.chunk.js.map",
     "runtime-main.js": "/reac-todo-app/static/js/runtime-main.843a976e.js",
     "runtime-main.js.map": "/reac-todo-app/static/js/runtime-main.843a976e.js.map",
     "static/js/2.04e42abd.chunk.js": "/reac-todo-app/static/js/2.04e42abd.chunk.js",
@@ -19,6 +19,6 @@
     "static/js/runtime-main.843a976e.js",
     "static/js/2.04e42abd.chunk.js",
     "static/css/main.79842562.chunk.css",
-    "static/js/main.0a47a649.chunk.js"
+    "static/js/main.84c0ceaa.chunk.js"
   ]
 }
