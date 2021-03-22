@@ -30,7 +30,18 @@ class App extends React.Component {
 
     componentDidMount() {
         const allTodos = JSON.parse(localStorage.getItem('allTodos'))
-        this.setState({allTodos})
+        const itFirsRun = JSON.parse(localStorage.getItem('itFirsRun'))
+        if (itFirsRun === null){
+            const sampleData = [
+                {text: 'Completed task', isCompleted: true, id: makeID(10)},
+                {text: 'Delete me', isCompleted: true, id: makeID(10)},
+                {text: 'Uncompleted task', isCompleted: false, id: makeID(10)},
+                {text: 'Edit me', isCompleted: false, id: makeID(10)},
+            ]
+            localStorage.setItem('itFirsRun', 'false')
+            this.setState({allTodos: sampleData})
+        }
+        else this.setState({allTodos})
     }
 
     saveToLocalStorage(editedTodo= false) {
